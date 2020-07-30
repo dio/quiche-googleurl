@@ -1,5 +1,5 @@
 _url_copts = select({
-    "@com_google_googleurl//build_config:windows_x86_64": [
+    "//build_config:windows_x86_64": [
         "/std:c++17",
     ],
     "//conditions:default": [
