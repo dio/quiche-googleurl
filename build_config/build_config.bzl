@@ -1,5 +1,7 @@
+"""This module provides common build configs."""
+
 _default_copts = select({
-    "@com_google_googleurl//build_config:windows_x86_64": [
+    "//build_config:windows_x86_64": [
         "/std:c++17",
     ],
     "//conditions:default": [
@@ -9,22 +11,22 @@ _default_copts = select({
 })
 
 _string_srcs = select({
-    "@com_google_googleurl//build_config:windows_x86_64": [],
+    "//build_config:windows_x86_64": [],
     "//conditions:default": ["string16.cc"],
 })
 
 _string_hdrs = select({
-    "@com_google_googleurl//build_config:windows_x86_64": ["string_util_win.h"],
+    "//build_config:windows_x86_64": ["string_util_win.h"],
     "//conditions:default": ["string_util_posix.h"],
 })
 
 _url_linkopts = select({
-    "@com_google_googleurl//build_config:with_system_icu": ["-licuuc"],
+    "//build_config:with_system_icu": ["-licuuc"],
     "//conditions:default": [],
 })
 
 _icuuc_deps = select({
-    "@com_google_googleurl//build_config:with_system_icu": [],
+    "//build_config:with_system_icu": [],
 
     # If we don't link against system ICU library, we must provide "@org_unicode_icuuc//:common".
     "//conditions:default": ["@org_unicode_icuuc//:common"],
