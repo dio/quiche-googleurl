@@ -43,7 +43,7 @@ cc_library(
         "url_file.h",
         "url_util.h",
     ],
-    copts = build_config._url_copts,
+    copts = build_config.default_copts,
     linkopts = ["-licuuc"],
     visibility = ["//visibility:public"],
     deps = [

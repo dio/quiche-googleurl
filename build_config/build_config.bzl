@@ -1,4 +1,6 @@
-_url_copts = select({
+"""This module provides ..."""
+
+_default_copts = select({
     "//build_config:windows_x86_64": [
         "/std:c++17",
     ],
@@ -9,5 +11,5 @@ _url_copts = select({
 })
 
 build_config = struct(
-    _url_copts = _url_copts,
+    default_copts = _default_copts,
 )
