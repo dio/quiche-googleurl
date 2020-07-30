@@ -1,4 +1,4 @@
-"""This module provides ..."""
+"""This module provides common build config options"""
 
 _default_copts = select({
     "//build_config:windows_x86_64": [

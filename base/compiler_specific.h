@@ -7,10 +7,6 @@
 
 #include "build/build_config.h"
 
-#if defined(COMPILER_MSVC) && !defined(__clang__)
-#error "Only clang-cl is supported on Windows, see https://crbug.com/988071"
-#endif
-
 // Annotate a variable indicating it's ok if the variable is not used.
 // (Typically used to silence a compiler warning when the assignment
 // is important for some other reason.)
@@ -55,8 +51,12 @@
 // prevent code folding, see gurl_base::debug::Alias.
 // Use like:
 //   void NOT_TAIL_CALLED FooBar();
-#if defined(__clang__) && __has_attribute(not_tail_called)
+#if defined(__clang__)
+#if defined(__has_attribute)
+#if __has_attribute(not_tail_called)
 #define NOT_TAIL_CALLED __attribute__((not_tail_called))
+#endif
+#endif
 #else
 #define NOT_TAIL_CALLED
 #endif
@@ -226,7 +226,9 @@
 #endif
 #endif
 
-#if defined(__clang__) && __has_attribute(uninitialized)
+#if defined(__clang__)
+#if defined(__has_attribute)
+#if __has_attribute(uninitialized)
 // Attribute "uninitialized" disables -ftrivial-auto-var-init=pattern for
 // the specified variable.
 // Library-wide alternative is
@@ -257,6 +259,8 @@
 // E.g. platform, bot, benchmark or test name in patch description or next to
 // the attribute.
 #define STACK_UNINITIALIZED __attribute__((uninitialized))
+#endif
+#endif
 #else
 #define STACK_UNINITIALIZED
 #endif
