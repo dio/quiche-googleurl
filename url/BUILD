@@ -44,11 +44,11 @@ cc_library(
         "url_util.h",
     ],
     copts = build_config.default_copts,
-    linkopts = ["-licuuc"],
+    linkopts = build_config.url_linkopts,
     visibility = ["//visibility:public"],
     deps = [
         "//base",
         "//base/strings",
         "//polyfills",
-    ],
+    ] + build_config.icuuc_deps,
 )

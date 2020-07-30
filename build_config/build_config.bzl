@@ -10,12 +10,12 @@ _default_copts = select({
     ],
 })
 
-_string_srcs = select({
+_strings_srcs = select({
     "//build_config:windows_x86_64": [],
     "//conditions:default": ["string16.cc"],
 })
 
-_string_hdrs = select({
+_strings_hdrs = select({
     "//build_config:windows_x86_64": ["string_util_win.h"],
     "//conditions:default": ["string_util_posix.h"],
 })
@@ -35,7 +35,7 @@ _icuuc_deps = select({
 build_config = struct(
     default_copts = _default_copts,
     url_linkopts = _url_linkopts,
-    string_srcs = _string_srcs,
-    string_hdrs = _string_hdrs,
+    strings_srcs = _strings_srcs,
+    strings_hdrs = _strings_hdrs,
     icuuc_deps = _icuuc_deps,
 )
